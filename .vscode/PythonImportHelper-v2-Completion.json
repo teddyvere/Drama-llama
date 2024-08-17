@@ -1,0 +1,107 @@
+[
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "create_app",
+        "importPath": "website",
+        "description": "website",
+        "isExtraImport": true,
+        "detail": "website",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def login():\n    return \"<p>Login</p>\"\n@routes.route('/logout')\ndef logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "sign_up",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():\n    return \"<p>Chatbot</p>\"",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "profile",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():\n    return \"<p>Chatbot</p>\"",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot():\n    return \"<p>Chatbot</p>\"",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "routes",
+        "kind": 5,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login')\ndef login():\n    return \"<p>Login</p>\"\n@routes.route('/logout')\ndef logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "website.views",
+        "description": "website.views",
+        "peekOfCode": "def home():\n    return \"<h1>Welcome to my website dog!</h1>\"",
+        "detail": "website.views",
+        "documentation": {}
+    },
+    {
+        "label": "views",
+        "kind": 5,
+        "importPath": "website.views",
+        "description": "website.views",
+        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\ndef home():\n    return \"<h1>Welcome to my website dog!</h1>\"",
+        "detail": "website.views",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "app = create_app()\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "main",
+        "documentation": {}
+    }
+]
