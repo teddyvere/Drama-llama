@@ -16,6 +16,22 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -44,7 +60,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():",
+        "peekOfCode": "def login():\n    data = request.form\n    print(data)  # Print form data for debugging purposes\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])  # Add POST method for form submission)\ndef sign_up():\n    if request.method == 'POST':",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -53,7 +69,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():",
+        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])  # Add POST method for form submission)\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -62,7 +78,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():",
+        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:\n            flash(\"Email must be at least 4 characters long.\", category='error')\n        elif len(firstName) < 2:\n            flash(\"First name must be at least 2 characters long.\", category='error')",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -98,7 +114,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login')\ndef login():\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])  # Add POST method for form submission)\ndef login():\n    data = request.form\n    print(data)  # Print form data for debugging purposes\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])  # Add POST method for form submission)",
         "detail": "website.routes",
         "documentation": {}
     },

@@ -4,11 +4,12 @@ source venv/bin/activate
 
 # install libraries 
 
-pip3 install Flask
+pip3 install Flask --break-system-packages
 
-pip3 install flask_login
+pip3 install flask_login --break-system-packages
 
-pip3 install flask_sqlalchemy
+pip install mysqlclient --break-system-packages
+
 
 
 
