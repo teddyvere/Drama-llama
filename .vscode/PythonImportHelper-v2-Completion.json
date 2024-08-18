@@ -8,6 +8,14 @@
         "documentation": {}
     },
     {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -36,7 +44,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    return \"<p>Login</p>\"\n@routes.route('/logout')\ndef logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():",
+        "peekOfCode": "def login():\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -45,7 +53,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():",
+        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -54,7 +62,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def sign_up():\n    return \"<p>Sign Up</p>\"\n@routes.route('/profile')\ndef profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():\n    return \"<p>Chatbot</p>\"",
+        "peekOfCode": "def sign_up():\n    return render_template(\"sign-up.html\")\n@routes.route('/profile')\ndef profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -63,7 +71,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def profile():\n    return \"<p>Profile</p>\"\n@routes.route('/chatbot')\ndef chatbot():\n    return \"<p>Chatbot</p>\"",
+        "peekOfCode": "def profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():\n    return render_template(\"about-us.html\")",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -72,7 +80,16 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def chatbot():\n    return \"<p>Chatbot</p>\"",
+        "peekOfCode": "def chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():\n    return render_template(\"about-us.html\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "about_us",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def about_us():\n    return render_template(\"about-us.html\")",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -81,7 +98,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login')\ndef login():\n    return \"<p>Login</p>\"\n@routes.route('/logout')\ndef logout():\n    return \"<p>Logout</p>\"\n@routes.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign Up</p>\"",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login')\ndef login():\n    return render_template(\"login.html\")\n@routes.route('/logout')\ndef logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up')\ndef sign_up():\n    return render_template(\"sign-up.html\")",
         "detail": "website.routes",
         "documentation": {}
     },

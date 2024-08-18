@@ -1,24 +1,28 @@
-from flask import Blueprint 
+from flask import Blueprint, render_template
 
 routes = Blueprint('routes', __name__)
 
 
 @routes.route('/login')
 def login():
-    return "<p>Login</p>"
+    return render_template("login.html")
 
 @routes.route('/logout')
 def logout():
-    return "<p>Logout</p>"
+    return render_template("logout.html")
 
 @routes.route('/sign-up')
 def sign_up():
-    return "<p>Sign Up</p>"
+    return render_template("sign-up.html")
 
 @routes.route('/profile')
 def profile():
-    return "<p>Profile</p>"
+    return render_template("profile.html")
 
 @routes.route('/chatbot')
 def chatbot():
-    return "<p>Chatbot</p>"
+    return render_template("chatbot.html")
+
+@routes.route('/about-us')
+def about_us():
+    return render_template("about-us.html")
