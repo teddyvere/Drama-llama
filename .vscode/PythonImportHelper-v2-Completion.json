@@ -1,18 +1,18 @@
 [
     {
-        "label": "now",
-        "importPath": "pendulum",
-        "description": "pendulum",
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "pendulum",
+        "detail": "flask",
         "documentation": {}
     },
     {
-        "label": "MySQL",
-        "importPath": "flask_mysqldb",
-        "description": "flask_mysqldb",
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
         "isExtraImport": true,
-        "detail": "flask_mysqldb",
+        "detail": "flask",
         "documentation": {}
     },
     {
@@ -72,6 +72,23 @@
         "documentation": {}
     },
     {
+        "label": "openai",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "openai",
+        "description": "openai",
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "now",
+        "importPath": "pendulum",
+        "description": "pendulum",
+        "isExtraImport": true,
+        "detail": "pendulum",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "website",
         "description": "website",
@@ -80,11 +97,29 @@
         "documentation": {}
     },
     {
+        "label": "Chat",
+        "kind": 6,
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "peekOfCode": "class Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "openai.api_key",
+        "kind": 5,
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "peekOfCode": "openai.api_key = \"Your_OPENAI_API_KEY_HERE\"\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
         "label": "add_prompt",
         "kind": 2,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "def add_prompt(data, user_id):\n    cur = mysql.connection.cursor()\n    query = \"INSERT INTO prompt (data, date, user_id) VALUES (%s, %s, %s)\"\n    cur.execute(query, (data, now().to_datetime_string(), user_id))\n    mysql.connection.commit()\n    cur.close()\n# Function to add a poem\ndef add_poem(data, user_id, prompt_id):\n    cur = mysql.connection.cursor()\n    query = \"INSERT INTO poem (data, date, user_id, prompt_id) VALUES (%s, %s, %s, %s)\"",
+        "peekOfCode": "def add_prompt(data, user_id):\n    conn = get_db_connection()\n    cur = conn.cursor()\n    query = \"INSERT INTO prompt (data, date, user_id) VALUES (?, ?, ?)\"\n    cur.execute(query, (data, now().to_datetime_string(), user_id))\n    conn.commit()\n    conn.close()\ndef add_poem(data, user_id, prompt_id):\n    conn = get_db_connection()\n    cur = conn.cursor()",
         "detail": "website.models",
         "documentation": {}
     },
@@ -93,7 +128,7 @@
         "kind": 2,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    cur = mysql.connection.cursor()\n    query = \"INSERT INTO poem (data, date, user_id, prompt_id) VALUES (%s, %s, %s, %s)\"\n    cur.execute(query, (data, now().to_datetime_string(), user_id, prompt_id))\n    mysql.connection.commit()\n    cur.close()\n# Function to add a user\ndef add_user(email, password, first_name):\n    cur = mysql.connection.cursor()\n    query = \"INSERT INTO user (email, password, first_name) VALUES (%s, %s, %s)\"",
+        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    conn = get_db_connection()\n    cur = conn.cursor()\n    query = \"INSERT INTO poem (data, date, user_id, prompt_id) VALUES (?, ?, ?, ?)\"\n    cur.execute(query, (data, now().to_datetime_string(), user_id, prompt_id))\n    conn.commit()\n    conn.close()\ndef add_user(email, password, first_name):\n    conn = get_db_connection()\n    cur = conn.cursor()",
         "detail": "website.models",
         "documentation": {}
     },
@@ -102,7 +137,7 @@
         "kind": 2,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "def add_user(email, password, first_name):\n    cur = mysql.connection.cursor()\n    query = \"INSERT INTO user (email, password, first_name) VALUES (%s, %s, %s)\"\n    cur.execute(query, (email, password, first_name))\n    mysql.connection.commit()\n    cur.close()\n# Function to fetch prompts by user ID\ndef get_prompts_by_user_id(user_id):\n    cur = mysql.connection.cursor()\n    query = \"SELECT * FROM prompt WHERE user_id = %s\"",
+        "peekOfCode": "def add_user(email, password, first_name):\n    conn = get_db_connection()\n    cur = conn.cursor()\n    query = \"INSERT INTO user (email, password, first_name) VALUES (?, ?, ?)\"\n    cur.execute(query, (email, password, first_name))\n    conn.commit()\n    conn.close()\ndef get_prompts_by_user_id(user_id):\n    conn = get_db_connection()\n    cur = conn.cursor()",
         "detail": "website.models",
         "documentation": {}
     },
@@ -111,7 +146,7 @@
         "kind": 2,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "def get_prompts_by_user_id(user_id):\n    cur = mysql.connection.cursor()\n    query = \"SELECT * FROM prompt WHERE user_id = %s\"\n    cur.execute(query, (user_id,))\n    prompts = cur.fetchall()\n    cur.close()\n    return prompts\n# Function to fetch poems by prompt ID\ndef get_poems_by_prompt_id(prompt_id):\n    cur = mysql.connection.cursor()",
+        "peekOfCode": "def get_prompts_by_user_id(user_id):\n    conn = get_db_connection()\n    cur = conn.cursor()\n    query = \"SELECT * FROM prompt WHERE user_id = ?\"\n    cur.execute(query, (user_id,))\n    prompts = cur.fetchall()\n    conn.close()\n    return prompts\ndef get_poems_by_prompt_id(prompt_id):\n    conn = get_db_connection()",
         "detail": "website.models",
         "documentation": {}
     },
@@ -120,7 +155,7 @@
         "kind": 2,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "def get_poems_by_prompt_id(prompt_id):\n    cur = mysql.connection.cursor()\n    query = \"SELECT * FROM poem WHERE prompt_id = %s\"\n    cur.execute(query, (prompt_id,))\n    poems = cur.fetchall()\n    cur.close()\n    return poems",
+        "peekOfCode": "def get_poems_by_prompt_id(prompt_id):\n    conn = get_db_connection()\n    cur = conn.cursor()\n    query = \"SELECT * FROM poem WHERE prompt_id = ?\"\n    cur.execute(query, (prompt_id,))\n    poems = cur.fetchall()\n    conn.close()\n    return poems",
         "detail": "website.models",
         "documentation": {}
     },
@@ -129,7 +164,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        # Access mysql within the function where context is available\n        cursor = mysql.connection.cursor()\n        cursor.execute(\"SELECT * FROM users WHERE email = %s AND password = %s\", (email, password))\n        user = cursor.fetchone()\n        cursor.close()\n        if user:",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        conn = get_db_connection()\n        cursor = conn.cursor()\n        cursor.execute(\"SELECT * FROM users WHERE email = ? AND password = ?\", (email, password))\n        user = cursor.fetchone()\n        conn.close()\n        if user:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -138,7 +173,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        # Initialize cursor as None to ensure it's in the proper scope",
+        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        try:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -147,7 +182,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        # Initialize cursor as None to ensure it's in the proper scope\n        cursor = None\n        try:\n            if len(email) < 4:",
+        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        try:\n            if len(email) < 4:\n                flash(\"Email must be at least 4 characters long.\", category='error')\n                return render_template(\"sign-up.html\")",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -192,7 +227,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        # Access mysql within the function where context is available\n        cursor = mysql.connection.cursor()\n        cursor.execute(\"SELECT * FROM users WHERE email = %s AND password = %s\", (email, password))\n        user = cursor.fetchone()",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        conn = get_db_connection()\n        cursor = conn.cursor()\n        cursor.execute(\"SELECT * FROM users WHERE email = ? AND password = ?\", (email, password))\n        user = cursor.fetchone()",
         "detail": "website.routes",
         "documentation": {}
     },

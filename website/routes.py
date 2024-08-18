@@ -1,6 +1,6 @@
 # routes.py
 from flask import Blueprint, render_template, request, flash, current_app
-from . import mysql  # Ensure this import is correct
+from . import get_db_connection
 
 routes = Blueprint('routes', __name__)
 
@@ -10,11 +10,11 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        # Access mysql within the function where context is available
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
         user = cursor.fetchone()
-        cursor.close()
+        conn.close()
         
         if user:
             flash("Logged in successfully!", category='success')
@@ -35,9 +35,6 @@ def sign_up():
         firstName = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        
-        # Initialize cursor as None to ensure it's in the proper scope
-        cursor = None
 
         try:
             if len(email) < 4:
@@ -53,18 +50,14 @@ def sign_up():
                 flash("Password must be at least 7 characters long.", category='error')
                 return render_template("sign-up.html")
 
-            cursor = mysql.connection.cursor()
-            cursor.execute("INSERT INTO users (email, first_name, password) VALUES (%s, %s, %s)", (email, firstName, password1))
-            mysql.connection.commit()
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO users (email, first_name, password) VALUES (?, ?, ?)", (email, firstName, password1))
+            conn.commit()
+            conn.close()
             flash("Registration successful!", category='success')
         except Exception as e:
             flash(f"Database error: {e}", category='error')
-            if mysql.connection:
-                mysql.connection.rollback()
-        finally:
-            # Check if cursor was successfully created before trying to close it
-            if cursor:
-                cursor.close()
 
     return render_template("sign-up.html")
 
