@@ -16,6 +16,14 @@
         "documentation": {}
     },
     {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "website",
         "description": "website",
@@ -82,7 +90,34 @@
         "kind": 2,
         "importPath": "website.views",
         "description": "website.views",
-        "peekOfCode": "def home():\n    return \"<h1>Welcome to my website dog!</h1>\"",
+        "peekOfCode": "def home():\n    return render_template(\"home.html\")\n@views.route('/left_sidebar')\ndef left_sidebar():\n    return render_template(\"left_sidebar.html\")\n@views.route('/right_sidebar')\ndef right_sidebar():\n    return render_template(\"right_sidebar.html\")\n@views.route('/no_sidebar')\ndef no_sidebar():",
+        "detail": "website.views",
+        "documentation": {}
+    },
+    {
+        "label": "left_sidebar",
+        "kind": 2,
+        "importPath": "website.views",
+        "description": "website.views",
+        "peekOfCode": "def left_sidebar():\n    return render_template(\"left_sidebar.html\")\n@views.route('/right_sidebar')\ndef right_sidebar():\n    return render_template(\"right_sidebar.html\")\n@views.route('/no_sidebar')\ndef no_sidebar():\n    return render_template(\"no_sidebar.html\")",
+        "detail": "website.views",
+        "documentation": {}
+    },
+    {
+        "label": "right_sidebar",
+        "kind": 2,
+        "importPath": "website.views",
+        "description": "website.views",
+        "peekOfCode": "def right_sidebar():\n    return render_template(\"right_sidebar.html\")\n@views.route('/no_sidebar')\ndef no_sidebar():\n    return render_template(\"no_sidebar.html\")",
+        "detail": "website.views",
+        "documentation": {}
+    },
+    {
+        "label": "no_sidebar",
+        "kind": 2,
+        "importPath": "website.views",
+        "description": "website.views",
+        "peekOfCode": "def no_sidebar():\n    return render_template(\"no_sidebar.html\")",
         "detail": "website.views",
         "documentation": {}
     },
@@ -91,7 +126,7 @@
         "kind": 5,
         "importPath": "website.views",
         "description": "website.views",
-        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\ndef home():\n    return \"<h1>Welcome to my website dog!</h1>\"",
+        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\ndef home():\n    return render_template(\"home.html\")\n@views.route('/left_sidebar')\ndef left_sidebar():\n    return render_template(\"left_sidebar.html\")\n@views.route('/right_sidebar')\ndef right_sidebar():\n    return render_template(\"right_sidebar.html\")",
         "detail": "website.views",
         "documentation": {}
     },

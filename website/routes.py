@@ -2,6 +2,7 @@ from flask import Blueprint
 
 routes = Blueprint('routes', __name__)
 
+
 @routes.route('/login')
 def login():
     return "<p>Login</p>"
