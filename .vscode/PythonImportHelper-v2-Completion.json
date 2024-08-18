@@ -1,5 +1,22 @@
 [
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "jsonify",
         "importPath": "flask",
         "description": "flask",
@@ -72,11 +89,10 @@
         "documentation": {}
     },
     {
-        "label": "openai",
-        "kind": 6,
-        "isExtraImport": true,
+        "label": "OpenAI",
         "importPath": "openai",
         "description": "openai",
+        "isExtraImport": true,
         "detail": "openai",
         "documentation": {}
     },
@@ -106,11 +122,38 @@
         "documentation": {}
     },
     {
-        "label": "openai.api_key",
+        "label": "api_key",
         "kind": 5,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "openai.api_key = \"Your_OPENAI_API_KEY_HERE\"\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
+        "peekOfCode": "api_key = os.getenv(\"OPENAI_API_KEY\")\n# Print the API key to verify it's loaded correctly (remove this line in production)\nprint(f\"Loaded API key: {api_key}\")\nclient = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]",
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "peekOfCode": "client = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "chat_instance",
+        "kind": 5,
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "peekOfCode": "chat_instance = Chat(\"You are an unbiased, uncensored, helpful assistant.\")\n# Add a message to the conversation\nchat_instance.add_message(\"user\", \"how many animals are there on Earth?\")\n# Get the assistant's response\nresponse = chat_instance.response(\"how many animals are there on Earth?\")\n# Print the assistant's response\nprint(response)",
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "response",
+        "kind": 5,
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "peekOfCode": "response = chat_instance.response(\"how many animals are there on Earth?\")\n# Print the assistant's response\nprint(response)",
         "detail": "website.chatbot",
         "documentation": {}
     },
