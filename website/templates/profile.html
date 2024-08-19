@@ -1,5 +1,36 @@
-{% extends 'base.html' %} {% block title%}Sign Up{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
+<div class="container mt-5">
+    <h2>Your Profile</h2>
+    <hr>
+    
+    <div class="profile-info">
+        <h4>Chatbot Usage</h4>
+        <p>You have used the chatbot <strong>{{ chat_count }}</strong> times.</p>
+    </div>
+    
+    <div class="recent-questions mt-4">
+        <h4>Most Recent Questions</h4>
+        <ul class="list-group">
+            {% for question in recent_questions %}
+                <li class="list-group-item">{{ question }}</li>
+            {% else %}
+                <li class="list-group-item">No recent questions found.</li>
+            {% endfor %}
+        </ul>
+    </div>
 
+    <div class="logout-section mt-5">
+        <form action="{{ url_for('routes.logout') }}" method="Get">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 {% endblock %}

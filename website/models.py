@@ -1,44 +1,24 @@
-from . import get_db_connection
-from pendulum import now
+from . import db
+from flask_login import UserMixin
+from datetime import datetime
 
-def add_prompt(data, user_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = "INSERT INTO prompt (data, date, user_id) VALUES (?, ?, ?)"
-    cur.execute(query, (data, now().to_datetime_string(), user_id))
-    conn.commit()
-    conn.close()
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
+    first_name = db.Column(db.String(150), nullable=False)
+    prompts_id = db.relationship('Prompt', backref='user', lazy=True)
+    poems_id = db.relationship('Poem', backref='user', lazy=True)
 
-def add_poem(data, user_id, prompt_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = "INSERT INTO poem (data, date, user_id, prompt_id) VALUES (?, ?, ?, ?)"
-    cur.execute(query, (data, now().to_datetime_string(), user_id, prompt_id))
-    conn.commit()
-    conn.close()
+class Prompt(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-def add_user(email, password, first_name):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = "INSERT INTO user (email, password, first_name) VALUES (?, ?, ?)"
-    cur.execute(query, (email, password, first_name))
-    conn.commit()
-    conn.close()
-
-def get_prompts_by_user_id(user_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = "SELECT * FROM prompt WHERE user_id = ?"
-    cur.execute(query, (user_id,))
-    prompts = cur.fetchall()
-    conn.close()
-    return prompts
-
-def get_poems_by_prompt_id(prompt_id):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = "SELECT * FROM poem WHERE prompt_id = ?"
-    cur.execute(query, (prompt_id,))
-    poems = cur.fetchall()
-    conn.close()
-    return poems
+class Poem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    data = db.Column(db.Text, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    prompt_id = db.Column(db.Integer, db.ForeignKey('prompt.id'), nullable=False)

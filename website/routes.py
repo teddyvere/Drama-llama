@@ -1,73 +1,83 @@
-# routes.py
 import traceback
-from flask import Blueprint, jsonify, render_template, request, flash, current_app
+from flask import Blueprint, jsonify, redirect, render_template, request, flash, url_for
+
 from website.chatbot import Chat
-from . import get_db_connection
+from website.functions import get_poems_by_prompt_id, get_prompts_by_user_id
+from .models import Prompt, User
+from . import db
+from .functions import add_poem, add_prompt, get_poems_by_prompt_id, get_prompts_by_user_id  # Correctly import from functions.py
+from flask_login import login_user, logout_user, current_user, login_required
 
 routes = Blueprint('routes', __name__)
+
 
 @routes.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
-        user = cursor.fetchone()
-        conn.close()
+
+        user = User.query.filter_by(email=email, password=password).first()
         
         if user:
-            flash("Logged in successfully!", category='success')
+            login_user(user, remember=True)
+            return redirect(url_for('views.home'))
         else:
             flash("Invalid credentials, try again.", category='error')
     return render_template("login.html")
 
-# Other route functions follow the same pattern
 
+
+
+# Other route functions follow the same pattern
 @routes.route('/logout')
+@login_required  
 def logout():
-    return render_template("home.html")
+    logout_user()
+    return redirect(url_for('routes.login'))
 
 @routes.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
-        firstName = request.form.get('firstName')
+        first_name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        try:
-            if len(email) < 4:
-                flash("Email must be at least 4 characters long.", category='error')
-                return render_template("sign-up.html")
-            if len(firstName) < 2:
-                flash("First name must be at least 2 characters long.", category='error')
-                return render_template("sign-up.html")
-            if password1 != password2:
-                flash("Passwords do not match.", category='error')
-                return render_template("sign-up.html")
-            if len(password1) < 7:
-                flash("Password must be at least 7 characters long.", category='error')
-                return render_template("sign-up.html")
-
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (email, first_name, password) VALUES (?, ?, ?)", (email, firstName, password1))
-            conn.commit()
-            conn.close()
+        if len(email) < 4:
+            flash("Email must be at least 4 characters long.", category='error')
+        elif len(first_name) < 2:
+            flash("First name must be at least 2 characters long.", category='error')
+        elif password1 != password2:
+            flash("Passwords do not match.", category='error')
+        elif len(password1) < 7:
+            flash("Password must be at least 7 characters long.", category='error')
+        else:
+            new_user = User(email=email, first_name=first_name, password=password1)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user, remember=True)
             flash("Registration successful!", category='success')
-        except Exception as e:
-            flash(f"Database error: {e}", category='error')
+            return redirect(url_for('views.home'))
 
     return render_template("sign-up.html")
 
+
+
 @routes.route('/profile')
+@login_required
 def profile():
-    return render_template("profile.html")
+    user_id = current_user.id
+    # Fetch all prompts for the user
+    prompts = get_prompts_by_user_id(user_id)
+    # Count how many times the user has used the chatbot
+    chat_count = len(prompts)
+    # Get the most recent 5 questions
+    recent_questions = [prompt.data for prompt in prompts][-5:]
+    return render_template('profile.html', chat_count=chat_count, recent_questions=recent_questions)
 
 @routes.route('/chatbot', methods=['GET', 'POST'])
+@login_required
 def chatbot():
     if request.method == 'POST':
         try:
@@ -75,11 +85,20 @@ def chatbot():
             if not user_input:
                 return jsonify({"error": "No message provided"}), 400
 
+            # Save the user input as a new prompt
+            add_prompt(data=user_input, user_id=current_user.id)
+
             # Create an instance of the Chat class
-            chat_instance = Chat("You are a poetic assistant. You must answer a question as if you were a poet.")
+            chat_instance = Chat("You are a poetic assistant. Answer questions in short poems or hiakus.")
             
             # Get the chatbot's response
             response = chat_instance.response(user_input)
+
+            # Fetch the last prompt added to get its ID
+            last_prompt = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.id.desc()).first()
+
+            # Save the chatbot's response as a new poem related to the prompt
+            add_poem(data=response, user_id=current_user.id, prompt_id=last_prompt.id)
 
             # Return the chatbot's response as JSON
             return jsonify({"response": response})

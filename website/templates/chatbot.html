@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Chatbot</h2>
+    <h2>llama</h2>
     <div id="chatbox" class="border p-3" style="height: 300px; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.447);">
         <ul id="messages" class="list-unstyled">
             <!-- Chat messages will be appended here dynamically -->
@@ -11,7 +11,7 @@
     </div>
     <form id="chat-form" method="post">
         <div class="input-group mt-3">
-            <input type="text" id="message-input" name="message" class="form-control" placeholder="Type your message..." autocomplete="off">
+            <input type="text" id="message-input" name="message" class="form-control" placeholder="Type your message..." autocomplete="off" style="font-size: 1em;">
             <button type="submit" class="btn btn-primary">Send</button>
         </div>
     </form>
@@ -20,6 +20,20 @@
 <br/>
 <br/>
 <br/>
+
+<style>
+    /* Style for bot messages */
+    .bot-message {
+        font-size: 1.25em; /* Larger font size for bot messages */
+        color: #333; /* Optional: Change the color for bot messages */
+    }
+    
+    /* Style for user messages */
+    .user-message {
+        font-size: 1em; /* Normal font size for user messages */
+        color: #333; /* Optional: Change the color for user messages */
+    }
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -34,9 +48,10 @@
             
             if (userMessage.trim() === '') return;
 
-            // Display user's message
+            // Display user's message with the 'user-message' class
             const userMessageElement = document.createElement('li');
             userMessageElement.textContent = 'You: ' + userMessage;
+            userMessageElement.classList.add('user-message');
             messages.appendChild(userMessageElement);
 
             // Scroll to the bottom of the chatbox
@@ -58,8 +73,10 @@
                 return response.json(); // Try to parse the response as JSON
             })
             .then(data => {
+                // Display bot's message with the 'bot-message' class
                 const botMessageElement = document.createElement('li');
                 botMessageElement.textContent = 'Bot: ' + data.response;
+                botMessageElement.classList.add('bot-message');
                 messages.appendChild(botMessageElement);
             
                 chatbox.scrollTop = chatbox.scrollHeight;
@@ -70,6 +87,9 @@
                 errorMessageElement.textContent = 'Error: ' + error.message;
                 messages.appendChild(errorMessageElement);
             });
+
+            // Clear the input field after submission
+            input.value = '';
         });
     });
 </script>

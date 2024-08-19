@@ -1,60 +1,37 @@
 from flask import Flask
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
-def get_db_connection():
-    conn = sqlite3.connect('drama_llama.db')
-    conn.row_factory = sqlite3.Row
-    return conn
+from flask_login import LoginManager
 
-def init_db():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    
-    # Create tables if they don't exist
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT NOT NULL,
-            first_name TEXT NOT NULL,
-            password TEXT NOT NULL
-        )
-    ''')
-    
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS prompt (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data TEXT NOT NULL,
-            date TEXT NOT NULL,
-            user_id INTEGER,
-            FOREIGN KEY (user_id) REFERENCES users(id)
-        )
-    ''')
-    
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS poem (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data TEXT NOT NULL,
-            date TEXT NOT NULL,
-            user_id INTEGER,
-            prompt_id INTEGER,
-            FOREIGN KEY (user_id) REFERENCES users(id),
-            FOREIGN KEY (prompt_id) REFERENCES prompt(id)
-        )
-    ''')
-    
-    conn.commit()
-    conn.close()
+
+db = SQLAlchemy()
+
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '69_2024_0030'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drama_llama.db'  # Change this URI as needed
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'routes.login'
+    login_manager.init_app(app)
     
-    init_db()  # Initialize the database
+    from .models import User
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+    
+    
 
     from .routes import routes
     from .views import views  
     
-    app.register_blueprint(routes)
-    app.register_blueprint(views)  # Register Blueprints
+    app.register_blueprint(routes, url_prefix='/')  # Register Blueprints
+    app.register_blueprint(views, url_prefix='/')  # Register Blueprints
+    
 
     return app
