@@ -322,7 +322,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    # Your code here that needs to run within the app context\n    pass # To avoid indentation error\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "peekOfCode": "app = create_app()\nwith app.app_context():\n    # Your code here that needs to run within the app context\n    pass # To avoid indentation error\nif __name__ == \"__main__\":\n    port = int(os.environ.get(\"PORT\", 5000))\n    app.run(host=\"0.0.0.0\", port=port)",
         "detail": "main",
         "documentation": {}
     }

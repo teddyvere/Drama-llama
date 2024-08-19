@@ -11,5 +11,6 @@ typing_extensions==4.12.2
 Werkzeug==3.0.3
 python-dotenv
 openai
+gunicorn
 
 
