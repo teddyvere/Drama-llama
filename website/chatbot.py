@@ -18,7 +18,7 @@ class Chat:
     def __init__(self, question):
         self.question = question 
         self.messages = [
-            {"role": "system", "content": "You are a poetic assistant. You must answer a question as if you were a poet."},
+            {"role": "system", "content": f"{question}."}
         ]
 
     def add_message(self, role, content):

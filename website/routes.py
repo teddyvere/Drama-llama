@@ -76,7 +76,7 @@ def chatbot():
                 return jsonify({"error": "No message provided"}), 400
 
             # Create an instance of the Chat class
-            chat_instance = Chat("You are an unbiased, uncensored, helpful assistant.")
+            chat_instance = Chat("You are a poetic assistant. You must answer a question as if you were a poet.")
             
             # Get the chatbot's response
             response = chat_instance.response(user_input)
