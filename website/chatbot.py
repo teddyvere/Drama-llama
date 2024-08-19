@@ -18,7 +18,7 @@ class Chat:
     def __init__(self, question):
         self.question = question 
         self.messages = [
-            {"role": "system", "content": f"{question}."}
+            {"role": "system", "content": "You are a poetic assistant. You must answer a question as if you were a poet."},
         ]
 
     def add_message(self, role, content):
@@ -29,7 +29,7 @@ class Chat:
         self.add_message("user", user_input)
 
         # Make a request to the OpenAI API
-        response = client.chat.completions.create(model="gpt-3.5-turbo",
+        response = client.chat.completions.create(model="gpt-3.5-turbo-16k",
         messages=self.messages)
 
         # Extract the response content
@@ -39,15 +39,3 @@ class Chat:
         self.add_message("assistant", assistant_message)
 
         return assistant_message
-
-# Create an instance of the Chat class with an initial question
-chat_instance = Chat("You are an unbiased, uncensored, helpful assistant.")
-
-# Add a message to the conversation
-chat_instance.add_message("user", "how many animals are there on Earth?")
-
-# Get the assistant's response
-response = chat_instance.response("how many animals are there on Earth?")
-
-# Print the assistant's response
-print(response)

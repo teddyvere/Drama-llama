@@ -41,6 +41,14 @@
         "documentation": {}
     },
     {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "render_template",
         "importPath": "flask",
         "description": "flask",
@@ -105,6 +113,23 @@
         "documentation": {}
     },
     {
+        "label": "traceback",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "Chat",
+        "importPath": "website.chatbot",
+        "description": "website.chatbot",
+        "isExtraImport": true,
+        "detail": "website.chatbot",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "website",
         "description": "website",
@@ -117,7 +142,7 @@
         "kind": 6,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "class Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
+        "peekOfCode": "class Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": \"You are a poetic assistant. You must answer a question as if you were a poet.\"},\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -126,7 +151,7 @@
         "kind": 5,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "api_key = os.getenv(\"OPENAI_API_KEY\")\n# Print the API key to verify it's loaded correctly (remove this line in production)\nprint(f\"Loaded API key: {api_key}\")\nclient = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]",
+        "peekOfCode": "api_key = os.getenv(\"OPENAI_API_KEY\")\n# Print the API key to verify it's loaded correctly (remove this line in production)\nprint(f\"Loaded API key: {api_key}\")\nclient = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": \"You are a poetic assistant. You must answer a question as if you were a poet.\"},\n        ]",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -135,25 +160,7 @@
         "kind": 5,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "client = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
-        "detail": "website.chatbot",
-        "documentation": {}
-    },
-    {
-        "label": "chat_instance",
-        "kind": 5,
-        "importPath": "website.chatbot",
-        "description": "website.chatbot",
-        "peekOfCode": "chat_instance = Chat(\"You are an unbiased, uncensored, helpful assistant.\")\n# Add a message to the conversation\nchat_instance.add_message(\"user\", \"how many animals are there on Earth?\")\n# Get the assistant's response\nresponse = chat_instance.response(\"how many animals are there on Earth?\")\n# Print the assistant's response\nprint(response)",
-        "detail": "website.chatbot",
-        "documentation": {}
-    },
-    {
-        "label": "response",
-        "kind": 5,
-        "importPath": "website.chatbot",
-        "description": "website.chatbot",
-        "peekOfCode": "response = chat_instance.response(\"how many animals are there on Earth?\")\n# Print the assistant's response\nprint(response)",
+        "peekOfCode": "client = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": \"You are a poetic assistant. You must answer a question as if you were a poet.\"},\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -216,7 +223,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return render_template(\"logout.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        try:",
+        "peekOfCode": "def logout():\n    return render_template(\"home.html\")\n@routes.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        try:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -234,7 +241,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot')\ndef chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():\n    return render_template(\"about-us.html\")\n# In routes.py or wherever you handle routes\n@routes.route('/data-page')",
+        "peekOfCode": "def profile():\n    return render_template(\"profile.html\")\n@routes.route('/chatbot', methods=['GET', 'POST'])\ndef chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Create an instance of the Chat class",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -243,7 +250,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def chatbot():\n    return render_template(\"chatbot.html\")\n@routes.route('/about-us')\ndef about_us():\n    return render_template(\"about-us.html\")\n# In routes.py or wherever you handle routes\n@routes.route('/data-page')\ndef get_data():\n    cursor = mysql.connection.cursor()\n    cursor.execute(\"SELECT * FROM some_table\")",
+        "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are an unbiased, uncensored, helpful assistant.\")\n            # Get the chatbot's response\n            response = chat_instance.response(user_input)",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -252,16 +259,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def about_us():\n    return render_template(\"about-us.html\")\n# In routes.py or wherever you handle routes\n@routes.route('/data-page')\ndef get_data():\n    cursor = mysql.connection.cursor()\n    cursor.execute(\"SELECT * FROM some_table\")\n    data = cursor.fetchall()\n    cursor.close()\n    return render_template('data-page.html')",
-        "detail": "website.routes",
-        "documentation": {}
-    },
-    {
-        "label": "get_data",
-        "kind": 2,
-        "importPath": "website.routes",
-        "description": "website.routes",
-        "peekOfCode": "def get_data():\n    cursor = mysql.connection.cursor()\n    cursor.execute(\"SELECT * FROM some_table\")\n    data = cursor.fetchall()\n    cursor.close()\n    return render_template('data-page.html')",
+        "peekOfCode": "def about_us():\n    return render_template(\"about-us.html\")",
         "detail": "website.routes",
         "documentation": {}
     },

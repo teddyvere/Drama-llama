@@ -1,5 +1,7 @@
 # routes.py
-from flask import Blueprint, render_template, request, flash, current_app
+import traceback
+from flask import Blueprint, jsonify, render_template, request, flash, current_app
+from website.chatbot import Chat
 from . import get_db_connection
 
 routes = Blueprint('routes', __name__)
@@ -26,7 +28,7 @@ def login():
 
 @routes.route('/logout')
 def logout():
-    return render_template("logout.html")
+    return render_template("home.html")
 
 @routes.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -65,19 +67,34 @@ def sign_up():
 def profile():
     return render_template("profile.html")
 
-@routes.route('/chatbot')
+@routes.route('/chatbot', methods=['GET', 'POST'])
 def chatbot():
+    if request.method == 'POST':
+        try:
+            user_input = request.form.get('message')
+            if not user_input:
+                return jsonify({"error": "No message provided"}), 400
+
+            # Create an instance of the Chat class
+            chat_instance = Chat("You are an unbiased, uncensored, helpful assistant.")
+            
+            # Get the chatbot's response
+            response = chat_instance.response(user_input)
+
+            # Return the chatbot's response as JSON
+            return jsonify({"response": response})
+
+        except Exception as e:
+            # Log the full traceback to understand the error
+            print("Error occurred:", traceback.format_exc())
+            
+            # Return a JSON response with the error message
+            return jsonify({"error": "Internal server error"}), 500
+    
+    # If GET request, render the chatbot page
     return render_template("chatbot.html")
 
 @routes.route('/about-us')
 def about_us():
     return render_template("about-us.html")
 
-# In routes.py or wherever you handle routes
-@routes.route('/data-page')
-def get_data():
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM some_table")
-    data = cursor.fetchall()
-    cursor.close()
-    return render_template('data-page.html')
