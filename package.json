@@ -1,6 +1,6 @@
 {
     "scripts": {
-      "startapp": "node app.js"
+      "start": "node app.js"
     }
   }
   
