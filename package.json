@@ -1,0 +1,6 @@
+{
+    "scripts": {
+      "startapp": "node app.js"
+    }
+  }
+  
