@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>drama llama </h2>
+    <h2> drill instructor </h2>
     <div id="chatbox" class="border p-3" style="height: 300px; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.447);">
         <ul id="messages" class="list-unstyled">
             <!-- Chat messages will be appended here dynamically -->
@@ -24,7 +24,7 @@
 <style>
     /* Style for bot messages */
     .bot-message {
-        font-size: 1.25em; /* Larger font size for bot messages */
+        font-size: 1em; /* Larger font size for bot messages */
         color: #333; /* Optional: Change the color for bot messages */
     }
     
@@ -57,7 +57,7 @@
             // Scroll to the bottom of the chatbox
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            fetch('/chatbot', {
+            fetch('/chatbot4', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

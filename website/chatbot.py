@@ -15,10 +15,10 @@ print(f"Loaded API key: {api_key}")
 client = OpenAI(api_key=api_key)
 
 class Chat:
-    def __init__(self, question):
-        self.question = question 
+    def __init__(self, initial_instruction):
+        self.instruction = initial_instruction 
         self.messages = [
-            {"role": "system", "content": f"{question}."}
+            {"role": "system", "content": self.instruction}
         ]
 
     def add_message(self, role, content):

@@ -270,7 +270,7 @@
         "kind": 6,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "class Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
+        "peekOfCode": "class Chat:\n    def __init__(self, initial_instruction):\n        self.instruction = initial_instruction \n        self.messages = [\n            {\"role\": \"system\", \"content\": self.instruction}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -279,7 +279,7 @@
         "kind": 5,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "api_key = os.getenv(\"OPENAI_API_KEY\")\n# Print the API key to verify it's loaded correctly (remove this line in production)\nprint(f\"Loaded API key: {api_key}\")\nclient = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]",
+        "peekOfCode": "api_key = os.getenv(\"OPENAI_API_KEY\")\n# Print the API key to verify it's loaded correctly (remove this line in production)\nprint(f\"Loaded API key: {api_key}\")\nclient = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, initial_instruction):\n        self.instruction = initial_instruction \n        self.messages = [\n            {\"role\": \"system\", \"content\": self.instruction}\n        ]",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -288,7 +288,7 @@
         "kind": 5,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "client = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, question):\n        self.question = question \n        self.messages = [\n            {\"role\": \"system\", \"content\": f\"{question}.\"}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
+        "peekOfCode": "client = OpenAI(api_key=api_key)\nclass Chat:\n    def __init__(self, initial_instruction):\n        self.instruction = initial_instruction \n        self.messages = [\n            {\"role\": \"system\", \"content\": self.instruction}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):",
         "detail": "website.chatbot",
         "documentation": {}
     },
@@ -406,6 +406,33 @@
         "importPath": "website.routes",
         "description": "website.routes",
         "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in short poems or hiakus.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot2",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot2():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a long poem.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot3",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot3():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a surfer who loves making surfing analogies.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot4",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot4():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a drill instructor who uses visuals to teach students and you love brownies.\")",
         "detail": "website.routes",
         "documentation": {}
     },

@@ -113,6 +113,117 @@ def chatbot():
     # If GET request, render the chatbot page
     return render_template("chatbot.html")
 
+@routes.route('/chatbot2', methods=['GET', 'POST'])
+@login_required
+def chatbot2():
+    if request.method == 'POST':
+        try:
+            user_input = request.form.get('message')
+            if not user_input:
+                return jsonify({"error": "No message provided"}), 400
+
+            # Save the user input as a new prompt
+            add_prompt(data=user_input, user_id=current_user.id)
+
+            # Create an instance of the Chat class
+            chat_instance = Chat("You are a poetic assistant. Answer questions in a long poem.")
+            
+            # Get the chatbot's response
+            response = chat_instance.response(user_input)
+
+            # Fetch the last prompt added to get its ID
+            last_prompt = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.id.desc()).first()
+
+            # Save the chatbot's response as a new poem related to the prompt
+            add_poem(data=response, user_id=current_user.id, prompt_id=last_prompt.id)
+
+            # Return the chatbot's response as JSON
+            return jsonify({"response": response})
+
+        except Exception as e:
+            # Log the full traceback to understand the error
+            print("Error occurred:", traceback.format_exc())
+            
+            # Return a JSON response with the error message
+            return jsonify({"error": "Internal server error"}), 500
+    
+    # If GET request, render the chatbot page
+    return render_template("chatbot2.html")
+
+@routes.route('/chatbot3', methods=['GET', 'POST'])
+@login_required
+def chatbot3():
+    if request.method == 'POST':
+        try:
+            user_input = request.form.get('message')
+            if not user_input:
+                return jsonify({"error": "No message provided"}), 400
+
+            # Save the user input as a new prompt
+            add_prompt(data=user_input, user_id=current_user.id)
+
+            # Create an instance of the Chat class
+            chat_instance = Chat("You are a surfer who loves making surfing analogies.")
+            
+            # Get the chatbot's response
+            response = chat_instance.response(user_input)
+
+            # Fetch the last prompt added to get its ID
+            last_prompt = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.id.desc()).first()
+
+            # Save the chatbot's response as a new poem related to the prompt
+            add_poem(data=response, user_id=current_user.id, prompt_id=last_prompt.id)
+
+            # Return the chatbot's response as JSON
+            return jsonify({"response": response})
+
+        except Exception as e:
+            # Log the full traceback to understand the error
+            print("Error occurred:", traceback.format_exc())
+            
+            # Return a JSON response with the error message
+            return jsonify({"error": "Internal server error"}), 500
+    
+    # If GET request, render the chatbot page
+    return render_template("chatbot3.html")
+
+@routes.route('/chatbot4', methods=['GET', 'POST'])
+@login_required
+def chatbot4():
+    if request.method == 'POST':
+        try:
+            user_input = request.form.get('message')
+            if not user_input:
+                return jsonify({"error": "No message provided"}), 400
+
+            # Save the user input as a new prompt
+            add_prompt(data=user_input, user_id=current_user.id)
+
+            # Create an instance of the Chat class
+            chat_instance = Chat("You are a drill instructor who uses visuals to teach students and you love brownies.")
+            
+            # Get the chatbot's response
+            response = chat_instance.response(user_input)
+
+            # Fetch the last prompt added to get its ID
+            last_prompt = Prompt.query.filter_by(user_id=current_user.id).order_by(Prompt.id.desc()).first()
+
+            # Save the chatbot's response as a new poem related to the prompt
+            add_poem(data=response, user_id=current_user.id, prompt_id=last_prompt.id)
+
+            # Return the chatbot's response as JSON
+            return jsonify({"response": response})
+
+        except Exception as e:
+            # Log the full traceback to understand the error
+            print("Error occurred:", traceback.format_exc())
+            
+            # Return a JSON response with the error message
+            return jsonify({"error": "Internal server error"}), 500
+    
+    # If GET request, render the chatbot page
+    return render_template("chatbot4.html")
+
 @routes.route('/about-us')
 def about_us():
     return render_template("about-us.html")
