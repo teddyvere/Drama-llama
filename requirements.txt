@@ -12,5 +12,7 @@ Werkzeug==3.0.3
 python-dotenv
 openai
 gunicorn
+pendulum
+
 
 
