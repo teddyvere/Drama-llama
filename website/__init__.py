@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
 from flask_login import LoginManager
 
 
@@ -12,7 +11,7 @@ def create_app():
     app.config['SECRET_KEY'] = '69_2024_0030'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drama_llama.db'  # Change this URI as needed
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    
     db.init_app(app)
 
     login_manager = LoginManager()
