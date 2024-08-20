@@ -4,20 +4,23 @@
 
 {% block content %}
     <!-- Hero -->
+    <img id="logo" src="static/assets/images/llama.png" alt="Drama Llama logo" />
+    <br />
     <section id="hero" class="container">
         <header>
             <h2>A chatbot created
             <br />
-              for the <a href="/chatbot"> optimal user experience</a></h2>
+            for the <a href="/chatbot">optimal user experience</a></h2>
         </header>
         <p>Transforming every interaction into a poetic masterpiece.
             <a href="/chatbot"></a> Whether you're asking about the weather or seeking life advice,
         <br />
-            <a href="/chatbot">expect a response that's both informative and beautifully crafted. </a>.</p>
+            <a href="/chatbot">expect a response that's both informative and beautifully crafted.</a></p>
         <ul class="actions">
             <li><a href="/chatbot" class="button">Get the party started</a></li>
         </ul>
     </section>
+    
     <br />
     <br />
     <br />
@@ -26,4 +29,12 @@
     <footer style="color: white;">
         2024 All rights reserved DramaLlama.inc
     </footer>
+
+    <style >
+        #logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 200px;
+        }
+    </style>
 {% endblock %}

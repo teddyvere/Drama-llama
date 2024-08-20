@@ -405,7 +405,34 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a short poem or haiku.\")",
+        "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a haiku.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot1_2",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot1_2():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a Free verse.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot1_3",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot1_3():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a Sonnet.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot1_4",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot1_4():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a Acrostic.\")",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -513,7 +540,7 @@
         "kind": 5,
         "importPath": "website.views",
         "description": "website.views",
-        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\n@login_required\ndef home():\n    return render_template(\"home.html\")\n@views.route('/left_sidebar')\ndef left_sidebar():\n    return render_template(\"left_sidebar.html\")\n@views.route('/right_sidebar')\ndef right_sidebar():",
+        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\ndef home():\n    return render_template(\"home.html\")\n@views.route('/left_sidebar')\ndef left_sidebar():\n    return render_template(\"left_sidebar.html\")\n@views.route('/right_sidebar')\ndef right_sidebar():\n    return render_template(\"right_sidebar.html\")",
         "detail": "website.views",
         "documentation": {}
     },

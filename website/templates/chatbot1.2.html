@@ -3,7 +3,31 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 style="color: rgb(52, 51, 51);">surfer bro </h2>
+    <h2 style="color: rgb(52, 51, 51);">drama llama</h2>
+    <div class="radio-group">
+    
+        <input type="radio" class="radio-input" name="options" id="option1" autocomplete="off">
+        <label class="radio-label" for="option2">
+            <a href="/chatbot" class="radio-link">Haiku</a>
+        </label>
+    
+    
+        <input type="radio" class="radio-input" name="options" id="option2" autocomplete="off">
+        <label class="radio-label" for="option4">
+            <a href="chatbot1.2" class="radio-link">Free verse</a>
+        </label>
+
+        <input type="radio" class="radio-input" name="options" id="option2" autocomplete="off">
+        <label class="radio-label" for="option4">
+            <a href="chatbot1.3" class="radio-link">Sonnet</a>
+        </label>
+
+        <input type="radio" class="radio-input" name="options" id="option2" autocomplete="off">
+        <label class="radio-label" for="option4">
+            <a href="chatbot1.4" class="radio-link">Acrostic</a>
+        </label>
+    </div>
+    
     <div id="chatbox" class="border p-3" style="height: 800px; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.447);">
         <ul id="messages" class="list-unstyled">
             <!-- Chat messages will be appended here dynamically -->
@@ -22,6 +46,40 @@
 <br/>
 
 <style>
+    /* Styling for radio buttons */ 
+    .radio-group {
+        display: flex;
+        gap: 10px; /* Space between buttons */
+    }
+
+    .radio-input {
+        display: none; /* Hide the default radio button */
+    }
+
+    .radio-label {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .radio-label:hover {
+        background-color: #0056b3;
+    }
+
+
+    .radio-link {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+
+    .radio-link:hover {
+        text-decoration: underline;
+    }
     /* Style for bot messages */
     .bot-message {
         font-size: 1em; /* Font size for bot messages */
@@ -89,7 +147,7 @@
             // Scroll to the bottom of the chatbox
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            fetch('/chatbot3', {
+            fetch('/chatbot1.2', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -107,8 +165,7 @@
             .then(data => {
                 // Display bot's message with the 'bot-message' class
                 const botMessageElement = document.createElement('li');
-                botMessageElement.innerHTML = 'Surfer:</br > ' + data.response.replace(/\n/g, '</br>'); //turn this into html <---------
-
+                botMessageElement.innerHTML = 'llama:</br > ' + data.response.replace(/\n/g, '</br>'); //turn this into html <---------
                 botMessageElement.classList.add('bot-message');
                 messages.appendChild(botMessageElement);
             

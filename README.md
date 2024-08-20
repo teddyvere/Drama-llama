@@ -18,6 +18,4 @@ pip install mysqlclient --break-system-packages
 # Run main App
 python3 main.py
 
-
 Add a share button
-Add a radio list at the top of chats
