@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>super drama llama </h2>
+    <h2> mafia don </h2>
     <div id="chatbox" class="border p-3" style="height: 300px; overflow-y: scroll; background-color: rgba(255, 255, 255, 0.447);">
         <ul id="messages" class="list-unstyled">
             <!-- Chat messages will be appended here dynamically -->
@@ -63,7 +63,7 @@
             // Scroll to the bottom of the chatbox
             chatbox.scrollTop = chatbox.scrollHeight;
 
-            fetch('/chatbot2', {
+            fetch('/chatbot5', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -81,7 +81,7 @@
             .then(data => {
                 // Display bot's message with the 'bot-message' class
                 const botMessageElement = document.createElement('li');
-                botMessageElement.textContent = 'llama: ' + data.response;
+                botMessageElement.textContent = 'Mafia Don: ' + data.response;
                 botMessageElement.classList.add('bot-message');
                 messages.appendChild(botMessageElement);
             

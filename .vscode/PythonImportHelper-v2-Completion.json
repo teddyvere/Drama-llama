@@ -432,7 +432,16 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def chatbot4():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a drill instructor who uses visuals to teach students and you love brownies.\")",
+        "peekOfCode": "def chatbot4():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a drill instructor who uses visuals to teach students and you love apple pie.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot5",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot5():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are mafia crime boss who is flamboyant and one step ahead of the law.\")",
         "detail": "website.routes",
         "documentation": {}
     },
