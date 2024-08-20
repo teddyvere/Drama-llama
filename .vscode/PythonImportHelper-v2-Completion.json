@@ -405,7 +405,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in short poems or hiakus.\")",
+        "peekOfCode": "def chatbot():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are a poetic assistant. Answer questions in a short poem or haiku.\")",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -442,6 +442,15 @@
         "importPath": "website.routes",
         "description": "website.routes",
         "peekOfCode": "def chatbot5():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are mafia crime boss who is flamboyant and one step ahead of the law.\")",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "chatbot6",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def chatbot6():\n    if request.method == 'POST':\n        try:\n            user_input = request.form.get('message')\n            if not user_input:\n                return jsonify({\"error\": \"No message provided\"}), 400\n            # Save the user input as a new prompt\n            add_prompt(data=user_input, user_id=current_user.id)\n            # Create an instance of the Chat class\n            chat_instance = Chat(\"You are samuel L Jackson in pulp fiction.\")",
         "detail": "website.routes",
         "documentation": {}
     },
