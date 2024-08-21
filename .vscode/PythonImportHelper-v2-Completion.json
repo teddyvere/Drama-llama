@@ -274,6 +274,30 @@
         "documentation": {}
     },
     {
+        "label": "User",
+        "importPath": "website.models",
+        "description": "website.models",
+        "isExtraImport": true,
+        "detail": "website.models",
+        "documentation": {}
+    },
+    {
+        "label": "Prompt",
+        "importPath": "website.models",
+        "description": "website.models",
+        "isExtraImport": true,
+        "detail": "website.models",
+        "documentation": {}
+    },
+    {
+        "label": "Poem",
+        "importPath": "website.models",
+        "description": "website.models",
+        "isExtraImport": true,
+        "detail": "website.models",
+        "documentation": {}
+    },
+    {
         "label": "Chat",
         "kind": 6,
         "importPath": "website.chatbot",
@@ -557,7 +581,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    tables = ['user', 'prompt', 'poem']\n    for table in tables:\n        if not inspector.has_table(table):\n            db.create_all()\n    pass \nif __name__ == \"__main__\":\n    port = int(os.environ.get(\"PORT\", 5000))",
+        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    # Map model classes to table names\n    table_models = {\n        'user': User,\n        'prompt': Prompt,\n        'poem': Poem\n    }\n    for table_name, model_class in table_models.items():",
         "detail": "main",
         "documentation": {}
     }
