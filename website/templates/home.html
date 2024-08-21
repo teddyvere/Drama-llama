@@ -26,6 +26,11 @@
     <br />
     <br />
     <footer>
+        section class="col-12">
+            <ul class="actions special">
+                <li><a href="https://cash.app/$teddyarchibald" class="button alt" id="tipsButton">Tip the Team</a></li>
+            </ul>
+        </section>
         <div class="footer-content">
             <p>&copy; 2024 DramaLlama Inc. All rights reserved.</p>
         </div>
@@ -58,4 +63,19 @@
         }
         
     </style>
+
+    <script>
+// Handle the "Tips" button click
+const tipsButton = document.getElementById('tipsButton');
+if (tipsButton) {
+    tipsButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        // You can redirect to a payment page, open a payment modal, or display a message
+        alert('Thank you for considering a tip! This will help us keep the lights on.');
+        // redirect to a payment page
+        window.location.href = 'https://cash.app/$teddyarchibald'; // Replace with your payment page URL
+    });
+}
+
+    </script>
 {% endblock %}
