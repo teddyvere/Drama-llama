@@ -2,7 +2,8 @@ import dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_mail import Mail, Message
+from flask_mail import Mail
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
@@ -20,12 +21,12 @@ class Config:
 
 mail = Mail()
 db = SQLAlchemy()
-
+migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '69_2024_0030'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drama_llama.db'  # Change this URI as needed
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config.from_object(Config)
     
@@ -36,6 +37,8 @@ def create_app():
     login_manager.init_app(app)
    
     mail.init_app(app)
+    
+    migrate.init_app(app, db) 
 
     
     from .models import User

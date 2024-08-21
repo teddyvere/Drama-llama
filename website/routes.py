@@ -1,7 +1,6 @@
 import traceback
 from webbrowser import get
 from flask import Blueprint, jsonify, redirect, render_template, request, flash, url_for
-
 from website.chatbot import Chat
 from .models import Prompt, User
 from .__init__ import db, mail
