@@ -78,7 +78,6 @@ def profile():
     return render_template('profile.html', chat_count=chat_count, recent_questions=recent_questions)
 
 @routes.route('/chatbot', methods=['GET', 'POST'])
-@login_required
 def chatbot():
     if request.method == 'POST':
         try:

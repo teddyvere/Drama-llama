@@ -4,9 +4,9 @@ from sqlalchemy import inspect
 from website.models import User, Prompt, Poem
 
 app = create_app()
+
 with app.app_context():
     inspector = inspect(db.engine)
-    # Map model classes to table names
     table_models = {
         'user': User,
         'prompt': Prompt,
