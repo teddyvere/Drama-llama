@@ -1,11 +1,15 @@
 <!-- Footer -->
 {% extends "base.html" %}
-
 {% block content %}
 <div id="article-wrapper">
   <div id="article" class="container">
       <!-- Space for article -->
       <header class="major">
+        <section class="col-12">
+            <ul class="actions special">
+                <li><a href="#" class="button alt" id="tipsButton">Send a Tip</a></li>
+            </ul>
+        </section>
           <h2 style="color: #ffffff;">About Us</h2>
           <p style="color: #ffffff;">Drama Llama: The Poetic Chatbot Revolution <br/>
               Introduction<br/>
@@ -104,5 +108,16 @@
             });
         }
     });
+    // Handle the "Tips" button click
+    const tipsButton = document.getElementById('tipsButton');
+    if (tipsButton) {
+        tipsButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            // You can redirect to a payment page, open a payment modal, or display a message
+            alert('Thank you for considering a tip! This feature is coming soon.');
+            // Alternatively, redirect to a payment page
+            // window.location.href = '/tips'; // Replace with your payment page URL
+        });
+    }
 </script>
 {% endblock %}
