@@ -17,6 +17,8 @@ pip3 install mysqlclient --break-system-packages
 
 pip3 install Flask-Migrate  --break-system-packages
 
+pip3 install Flask-Mail --break-system-packages
+
 
 # Run main App
 python3 main.py

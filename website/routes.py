@@ -1,12 +1,13 @@
 import traceback
+from webbrowser import get
 from flask import Blueprint, jsonify, redirect, render_template, request, flash, url_for
 
 from website.chatbot import Chat
-from website.functions import get_poems_by_prompt_id, get_prompts_by_user_id
 from .models import Prompt, User
-from . import db
-from .functions import add_poem, add_prompt, get_poems_by_prompt_id, get_prompts_by_user_id  # Correctly import from functions.py
+from .__init__ import db, mail
+from .functions import add_poem, add_prompt, get_poems_by_prompt_id, get_prompts_by_user_id 
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_mail import Message
 
 routes = Blueprint('routes', __name__)
 
@@ -409,9 +410,22 @@ def chatbot6():
     # If GET request, render the chatbot page
     return render_template("chatbot6.html")
 
-@routes.route('/about-us')
+@routes.route('/about-us', methods=['GET', 'POST'])
 def about_us():
-    return render_template("about-us.html")
+    if request.method == 'POST':
+        if 'send_message' in request.form:
+            name = request.form.get('name')
+            email = request.form.get('email')
+            message = request.form.get('message')
 
+            # Process the form data, e.g., send an email or save to the database
+            print(f'Form data received: Name={name}, Email={email}, Message={message}')
+
+            flash("Your message has been sent!", "success")
+            return redirect(url_for('routes.about_us'))
+
+    return render_template('about-us.html')
+
+            
 
 

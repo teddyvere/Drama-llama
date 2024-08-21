@@ -25,16 +25,16 @@
                         </header>
                         <div class="row">
                             <section class="col-6 col-12-narrower">
-                                <form method="post" action="#">
+                                <form method="POST" action="{{ url_for('routes.about_us') }}">
                                     <div class="row gtr-50">
                                         <div class="col-6 col-12-mobile">
-                                            <input name="name" placeholder="Name" type="text" />
+                                            <input type="text" name="name" placeholder="Enter your name" required>
                                         </div>
                                         <div class="col-6 col-12-mobile">
-                                            <input name="email" placeholder="Email" type="text" />
+                                            <input name="email" placeholder="Email" type="email" required />
                                         </div>
                                         <div class="col-12">
-                                            <textarea name="message" placeholder="Message"></textarea>
+                                            <textarea name="message" placeholder="Message" required></textarea>
                                         </div>
                                         <div class="col-12">
                                             <ul class="actions">
@@ -45,17 +45,16 @@
                                     </div>
                                 </form>
                             </section>
+                        </div>                        
                             <section class="col-6 col-12-narrower">
                                 <div class="row gtr-0">
                                     <ul class="divided icons col-6 col-12-mobile">
                                         <li class="icon brands fa-twitter"><a href="#"><span class="extra">twitter.com/</span>untitled</a></li>
                                         <li class="icon brands fa-facebook-f"><a href="#"><span class="extra">facebook.com/</span>untitled</a></li>
-                                        <li class="icon brands fa-dribbble"><a href="#"><span class="extra">dribbble.com/</span>untitled</a></li>
                                     </ul>
                                     <ul class="divided icons col-6 col-12-mobile">
                                         <li class="icon brands fa-instagram"><a href="#"><span class="extra">instagram.com/</span>untitled</a></li>
                                         <li class="icon brands fa-youtube"><a href="#"><span class="extra">youtube.com/</span>untitled</a></li>
-                                        <li class="icon brands fa-pinterest"><a href="#"><span class="extra">pinterest.com/</span>untitled</a></li>
                                     </ul>
                                 </div>
                             </section>
@@ -63,8 +62,51 @@
                     </div>
                     <div id="copyright" class="container">
                         <ul class="menu">
-                            <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                            <li>&copy; </li>2024 DramaLlama Inc. All rights reserved.
                         </ul>
                     </div>
                 </div>
+            
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const form = document.getElementById('contactForm');
+                        if (form) {
+                            form.addEventListener('submit', function(e) {
+                                e.preventDefault(); // Prevent the default form submission
+                    
+                                const name = document.getElementById('name').value;
+                                const email = document.getElementById('email').value;
+                                const message = document.getElementById('message').value;
+                    
+                                // Create a FormData object to hold the form data
+                                const formData = new FormData();
+                                formData.append('name', name);
+                                formData.append('email', email);
+                                formData.append('message', message);
+                                formData.append('send_message', true); // Add the send_message field
+                    
+                                // Use fetch to send the data to the server
+                                fetch('/about-us', {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                .then(response => response.text())
+                                .then(data => {
+                                    // Handle the response, show a success message, etc.
+                                    console.log(data);
+                                    alert('Your message has been sent!');
+                                    // Optionally, you can clear the form fields
+                                    form.reset();
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert('There was an error sending your message.');
+                                });
+                            });
+                        }
+                    });
+                    
+                
+                    
+                </script>
                 {% endblock %}

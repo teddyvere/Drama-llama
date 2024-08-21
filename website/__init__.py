@@ -1,8 +1,24 @@
+import dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+class Config:
+    MAIL_SERVER = 'smtp.gmail.com'  # Use your email service's SMTP server
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_USERNAME = os.environ.get('EMAIL_USER')  # Set this in your environment
+    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')  # Set this in your environment
+    MAIL_DEFAULT_SENDER = ('DramaLlama', os.environ.get('EMAIL_USER'))
+    MAIL_MAX_EMAILS = None
+    MAIL_ASCII_ATTACHMENTS = False
 
+mail = Mail()
 db = SQLAlchemy()
 
 
@@ -11,12 +27,16 @@ def create_app():
     app.config['SECRET_KEY'] = '69_2024_0030'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drama_llama.db'  # Change this URI as needed
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_object(Config)
     
     db.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'routes.login'
     login_manager.init_app(app)
+   
+    mail.init_app(app)
+
     
     from .models import User
     

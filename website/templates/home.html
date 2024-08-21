@@ -25,10 +25,11 @@
     <br />
     <br />
     <br />
-    <footer style="color: white;">
-    <footer style="color: white;">
-        2024 All rights reserved DramaLlama.inc
-    </footer>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 DramaLlama Inc. All rights reserved.</p>
+        </div>
+    </footer>    
     <br />
     <br />
 
@@ -38,5 +39,23 @@
             height: auto;
             margin-bottom: 200px;
         }
+
+        footer {
+            padding: 20px 0; /* Padding for top and bottom */
+            text-align: center; /* Center the text */
+            color: #fff; /* White text color */
+            font-size: 14px; /* Font size */
+            font-family: 'Arial', sans-serif; /* Font family */
+        }
+        
+        .footer-content p {
+            margin: 0; /* Remove default margin */
+            line-height: 1.5; /* Line height for readability */
+        }
+        
+        .footer-content p::before {
+            font-weight: bold;
+        }
+        
     </style>
 {% endblock %}

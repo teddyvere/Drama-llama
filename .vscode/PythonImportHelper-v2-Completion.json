@@ -226,6 +226,14 @@
         "documentation": {}
     },
     {
+        "label": "get",
+        "importPath": "webbrowser",
+        "description": "webbrowser",
+        "isExtraImport": true,
+        "detail": "webbrowser",
+        "documentation": {}
+    },
+    {
         "label": "Chat",
         "importPath": "website.chatbot",
         "description": "website.chatbot",
@@ -234,19 +242,11 @@
         "documentation": {}
     },
     {
-        "label": "get_poems_by_prompt_id",
-        "importPath": "website.functions",
-        "description": "website.functions",
+        "label": "Message",
+        "importPath": "flask_mail",
+        "description": "flask_mail",
         "isExtraImport": true,
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
-        "label": "get_prompts_by_user_id",
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "isExtraImport": true,
-        "detail": "website.functions",
+        "detail": "flask_mail",
         "documentation": {}
     },
     {
@@ -486,7 +486,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def about_us():\n    return render_template(\"about-us.html\")",
+        "peekOfCode": "def about_us():\n    if request.method == 'POST':\n        if 'send_message' in request.form:\n            name = request.form.get('name')\n            email = request.form.get('email')\n            message = request.form.get('message')\n            # Process the form data, e.g., send an email or save to the database\n            print(f'Form data received: Name={name}, Email={email}, Message={message}')\n            flash(\"Your message has been sent!\", \"success\")\n            return redirect(url_for('routes.about_us'))",
         "detail": "website.routes",
         "documentation": {}
     },
