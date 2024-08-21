@@ -4,7 +4,8 @@ from website import create_app, db
 
 app = create_app()
 with app.app_context():
-    db.create_all()
+    if not db.engine.has_table('users'):
+        db.create_all()
     pass 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
