@@ -6,8 +6,10 @@ from sqlalchemy import inspect
 app = create_app()
 with app.app_context():
     inspector = inspect(db.engine)
-    if not inspector.has_table('user'):
-        db.create_all()
+    tables = ['user', 'prompt', 'poem']
+    for table in tables:
+        if not inspector.has_table(table):
+            db.create_all()
     pass 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
