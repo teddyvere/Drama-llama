@@ -4,7 +4,7 @@ from website import create_app, db
 
 app = create_app()
 with app.app_context():
-    if not db.engine.has_table('users'):
+    if not os.path.exists('drama_llama.db'):  # Check if database file exists
         db.create_all()
     pass 
 if __name__ == "__main__":
