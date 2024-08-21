@@ -1,10 +1,12 @@
 import os
 from website import create_app, db
+from sqlalchemy import inspect
 
 
 app = create_app()
 with app.app_context():
-    if not os.path.exists('drama_llama.db'):  # Check if database file exists
+    inspector = inspect(db.engine)
+    if not inspector.has_table('user'):
         db.create_all()
     pass 
 if __name__ == "__main__":

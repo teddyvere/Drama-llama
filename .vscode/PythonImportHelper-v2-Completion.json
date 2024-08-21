@@ -266,6 +266,14 @@
         "documentation": {}
     },
     {
+        "label": "inspect",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "Chat",
         "kind": 6,
         "importPath": "website.chatbot",
@@ -549,7 +557,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    if not os.path.exists('drama_llama.db'):  # Check if database file exists\n        db.create_all()\n    pass \nif __name__ == \"__main__\":\n    port = int(os.environ.get(\"PORT\", 5000))\n    app.run(host=\"0.0.0.0\", port=port,debug=True)",
+        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    if not inspector.has_table('user'):\n        db.create_all()\n    pass \nif __name__ == \"__main__\":\n    port = int(os.environ.get(\"PORT\", 5000))\n    app.run(host=\"0.0.0.0\", port=port,debug=True)",
         "detail": "main",
         "documentation": {}
     }
