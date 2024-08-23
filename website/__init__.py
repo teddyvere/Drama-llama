@@ -28,6 +28,8 @@ class Config:
 
 
 def create_app():
+    
+    global db
 
     print('''
 [````````````11¶¶¶¶¶¶
