@@ -1,6 +1,6 @@
 
 import logging
-from flask import Flask
+from flask import Flask, app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -10,6 +10,11 @@ from sqlalchemy import text
 import os
 
 load_dotenv()
+
+mail = Mail()
+db = SQLAlchemy()
+migrate = Migrate()
+
 class Config:
     MAIL_SERVER = 'smtp.gmail.com'  # Use your email service's SMTP server
     MAIL_PORT = 587
@@ -21,14 +26,9 @@ class Config:
     MAIL_MAX_EMAILS = None
     MAIL_ASCII_ATTACHMENTS = False
 
-mail = None
-db = None
-migrate = None
 
 def create_app():
-    mail = Mail()
-    db = SQLAlchemy()
-    migrate = Migrate()
+
     print('''
 [````````````11¶¶¶¶¶¶
 ``````````````¶¶¶¶¶¶`
