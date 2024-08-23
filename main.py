@@ -1,8 +1,6 @@
 import os
 import logging
 from website import create_app, db
-from sqlalchemy import inspect
-from website.models import Users, Prompt, Poem
 
 # Create and configure the app
 app = create_app()
