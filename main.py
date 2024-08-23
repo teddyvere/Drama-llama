@@ -1,7 +1,7 @@
 import os
 import logging
 from website import create_app, db
-from sqlalchemy import inspect
+from sqlalchemy import inspect, text
 from website.models import Users, Prompt, Poem
 
 # Create and configure the app
@@ -16,7 +16,7 @@ with app.app_context():
         logging.info(f"Database URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
         # Check database connection
-        db.session.execute('SELECT 1')
+        db.session.execute(text('SELECT 1'))
         logging.info("Database connection successful")
     except Exception as e:
         logging.error("Database connection failed: %s", e)
