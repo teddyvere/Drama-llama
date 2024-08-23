@@ -113,7 +113,7 @@
         "documentation": {}
     },
     {
-        "label": "logging",
+        "label": "Flask",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -694,7 +694,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    try:\n        # Check database connection\n        db.engine.execute('SELECT 1')\n        logging.info(\"Database connection successful\")\n    except Exception as e:\n        logging.error(\"Database connection failed: %s\", e)\n    inspector = inspect(db.engine)\n    table_models = {",
+        "peekOfCode": "app = create_app()\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nwith app.app_context():\n    try:\n        # Check database connection\n        with db.engine.connect() as connection:\n            connection.execute('SELECT 1')\n        logging.info(\"Database connection successful\")\n    except Exception as e:",
         "detail": "main",
         "documentation": {}
     }
