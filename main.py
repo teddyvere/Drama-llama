@@ -1,4 +1,6 @@
 import os
+
+from flask import logging
 from website import create_app, db
 from sqlalchemy import inspect
 from website.models import Users, Prompt, Poem
@@ -6,6 +8,13 @@ from website.models import Users, Prompt, Poem
 app = create_app()
 
 with app.app_context():
+    try:
+        # Check database connection
+        db.engine.execute('SELECT 1')
+        logging.info("Database connection successful")
+    except Exception as e:
+        logging.error("Database connection failed: %s", e)
+    
     inspector = inspect(db.engine)
     table_models = {
         'users': Users,

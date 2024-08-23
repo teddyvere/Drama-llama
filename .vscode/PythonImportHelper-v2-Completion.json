@@ -113,6 +113,14 @@
         "documentation": {}
     },
     {
+        "label": "logging",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "context",
         "importPath": "alembic",
         "description": "alembic",
@@ -686,7 +694,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    table_models = {\n        'users': Users,\n        'prompt': Prompt,\n        'poem': Poem\n    }\n    for table_name, model_class in table_models.items():\n        if not inspector.has_table(table_name):",
+        "peekOfCode": "app = create_app()\nwith app.app_context():\n    try:\n        # Check database connection\n        db.engine.execute('SELECT 1')\n        logging.info(\"Database connection successful\")\n    except Exception as e:\n        logging.error(\"Database connection failed: %s\", e)\n    inspector = inspect(db.engine)\n    table_models = {",
         "detail": "main",
         "documentation": {}
     }

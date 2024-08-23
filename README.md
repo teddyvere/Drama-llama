@@ -74,7 +74,7 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 Contact
 For any questions, suggestions, or feedback, feel free to contact us:
 
-Project Maintainer: Your Name
+Project Maintainer: Teddy Archibald
 Email: teddyvere@gmail.com
 
 
