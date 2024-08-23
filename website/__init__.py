@@ -21,11 +21,14 @@ class Config:
     MAIL_MAX_EMAILS = None
     MAIL_ASCII_ATTACHMENTS = False
 
-mail = Mail()
-db = SQLAlchemy()
-migrate = Migrate()
+mail = None
+db = None
+migrate = None
 
 def create_app():
+    mail = Mail()
+    db = SQLAlchemy()
+    migrate = Migrate()
     print('''
 [````````````11¶¶¶¶¶¶
 ``````````````¶¶¶¶¶¶`
