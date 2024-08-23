@@ -1,5 +1,6 @@
 import os
 import logging
+import traceback
 from website import create_app, db
 from sqlalchemy import inspect, text
 from website.models import Users, Prompt, Poem
@@ -10,7 +11,10 @@ app = create_app()
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
+import traceback
+
 with app.app_context():
+    traceback.print_stack()
     try:
         # Check the add user function
         logging.info("with app.app_context():")
