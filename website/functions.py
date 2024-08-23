@@ -1,5 +1,5 @@
 from datetime import datetime
-from .models import db, User, Prompt, Poem
+from .models import db, Users, Prompt, Poem
 from pendulum import now
 
 def add_prompt(data, user_id):
@@ -15,7 +15,7 @@ def add_poem(data, user_id, prompt_id):
     db.session.commit()
 
 def add_user(email, password, first_name):
-    new_user = User(email=email, password=password, first_name=first_name)
+    new_user = Users(email=email, password=password, first_name=first_name)
     db.session.add(new_user)
     db.session.commit()
 

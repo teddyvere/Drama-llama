@@ -1,14 +1,14 @@
 import os
 from website import create_app, db
 from sqlalchemy import inspect
-from website.models import User, Prompt, Poem
+from website.models import Users, Prompt, Poem
 
 app = create_app()
 
 with app.app_context():
     inspector = inspect(db.engine)
     table_models = {
-        'user': User,
+        'users': Users,
         'prompt': Prompt,
         'poem': Poem
     }

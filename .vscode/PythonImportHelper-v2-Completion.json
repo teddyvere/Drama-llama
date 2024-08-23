@@ -307,7 +307,7 @@
         "documentation": {}
     },
     {
-        "label": "User",
+        "label": "Users",
         "importPath": "website.models",
         "description": "website.models",
         "isExtraImport": true,
@@ -443,7 +443,7 @@
         "kind": 2,
         "importPath": "website.functions",
         "description": "website.functions",
-        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()\ndef add_user(email, password, first_name):\n    new_user = User(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):",
+        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()\ndef add_user(email, password, first_name):\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):",
         "detail": "website.functions",
         "documentation": {}
     },
@@ -452,7 +452,7 @@
         "kind": 2,
         "importPath": "website.functions",
         "description": "website.functions",
-        "peekOfCode": "def add_user(email, password, first_name):\n    new_user = User(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
+        "peekOfCode": "def add_user(email, password, first_name):\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
         "detail": "website.functions",
         "documentation": {}
     },
@@ -475,11 +475,11 @@
         "documentation": {}
     },
     {
-        "label": "User",
+        "label": "Users",
         "kind": 6,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "class User(db.Model, UserMixin):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(150), nullable=False)\n    first_name = db.Column(db.String(150), nullable=False)\n    prompts_id = db.relationship('Prompt', backref='user', lazy=True)\n    poems_id = db.relationship('Poem', backref='user', lazy=True)\nclass Prompt(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)",
+        "peekOfCode": "class Users(db.Model, UserMixin):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(150), nullable=False)\n    first_name = db.Column(db.String(150), nullable=False)\n    prompts_id = db.relationship('Prompt', backref='users', lazy=True)\n    poems_id = db.relationship('Poem', backref='users', lazy=True)\nclass Prompt(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)",
         "detail": "website.models",
         "documentation": {}
     },
@@ -488,7 +488,7 @@
         "kind": 6,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "class Prompt(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)\nclass Poem(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)",
+        "peekOfCode": "class Prompt(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)\nclass Poem(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)",
         "detail": "website.models",
         "documentation": {}
     },
@@ -497,7 +497,7 @@
         "kind": 6,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "class Poem(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)\n    prompt_id = db.Column(db.Integer, db.ForeignKey('prompt.id'), nullable=False)",
+        "peekOfCode": "class Poem(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.Text, nullable=False)\n    date = db.Column(db.DateTime, default=datetime.utcnow)\n    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)\n    prompt_id = db.Column(db.Integer, db.ForeignKey('prompt.id'), nullable=False)",
         "detail": "website.models",
         "documentation": {}
     },
@@ -506,7 +506,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = User.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))\n        else:\n            flash(\"Invalid credentials, try again.\", category='error')",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))\n        else:\n            flash(\"Invalid credentials, try again.\", category='error')",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -632,7 +632,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = User.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -686,7 +686,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    table_models = {\n        'user': User,\n        'prompt': Prompt,\n        'poem': Poem\n    }\n    for table_name, model_class in table_models.items():\n        if not inspector.has_table(table_name):",
+        "peekOfCode": "app = create_app()\nwith app.app_context():\n    inspector = inspect(db.engine)\n    table_models = {\n        'users': Users,\n        'prompt': Prompt,\n        'poem': Poem\n    }\n    for table_name, model_class in table_models.items():\n        if not inspector.has_table(table_name):",
         "detail": "main",
         "documentation": {}
     }

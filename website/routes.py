@@ -2,7 +2,7 @@ import traceback
 from webbrowser import get
 from flask import Blueprint, jsonify, redirect, render_template, request, flash, url_for
 from website.chatbot import Chat
-from .models import Prompt, User
+from .models import Prompt, Users
 from .__init__ import db, mail
 from .functions import add_poem, add_prompt, get_poems_by_prompt_id, get_prompts_by_user_id 
 from flask_login import login_user, logout_user, current_user, login_required
@@ -17,7 +17,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user = User.query.filter_by(email=email, password=password).first()
+        user = Users.query.filter_by(email=email, password=password).first()
         
         if user:
             login_user(user, remember=True)
@@ -53,7 +53,7 @@ def sign_up():
         elif len(password1) < 7:
             flash("Password must be at least 7 characters long.", category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=password1)
+            new_user = Users(email=email, first_name=first_name, password=password1)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)

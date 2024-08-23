@@ -41,11 +41,11 @@ def create_app():
     migrate.init_app(app, db) 
 
     
-    from .models import User
+    from .models import Users
     
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        return Users.query.get(int(user_id))
     
     
 
