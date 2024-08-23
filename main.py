@@ -28,8 +28,8 @@ logging.basicConfig(level=logging.INFO)
 #                 logging.info(f"Created table {table_name}")
 #     except Exception as e:
 #         logging.error(f"Error inspecting or creating tables: {e}")
-
-db.create_all()
+with app.app_context():
+    db.create_all()
 
 
 if __name__ == "__main__":
