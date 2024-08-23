@@ -1,12 +1,11 @@
 import traceback
-from webbrowser import get
 from flask import Blueprint, jsonify, redirect, render_template, request, flash, url_for
-from website.chatbot import Chat
+from . import db
 from .models import Prompt, Users
-from .__init__ import db, mail
-from .functions import add_poem, add_prompt, get_poems_by_prompt_id, get_prompts_by_user_id 
+from .functions import add_poem, add_prompt, get_prompts_by_user_id 
 from flask_login import login_user, logout_user, current_user, login_required
-from flask_mail import Message
+from website.chatbot import Chat
+
 
 routes = Blueprint('routes', __name__)
 

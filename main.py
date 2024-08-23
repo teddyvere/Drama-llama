@@ -9,23 +9,6 @@ app = create_app()
 logging.basicConfig(level=logging.INFO)
 
 
-# Inspect the database for the presence of tables
-# with app.app_context():
-#     try:
-#         inspector = inspect(db.engine)
-#         table_models = {
-#             'users': Users,
-#             'prompt': Prompt,
-#             'poem': Poem
-#         }
-        
-#         # Create tables if they do not exist
-#         for table_name, model_class in table_models.items():
-#             if not inspector.has_table(table_name):
-#                 model_class.__table__.create(bind=db.engine)
-#                 logging.info(f"Created table {table_name}")
-#     except Exception as e:
-#         logging.error(f"Error inspecting or creating tables: {e}")
 with app.app_context():
     if db != None:
         db.create_all()

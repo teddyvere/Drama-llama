@@ -1,8 +1,8 @@
 from datetime import datetime
 import logging
 from flask import current_app
-from .models import db, Users, Prompt, Poem
-from pendulum import now
+from . import db
+from .models import Users, Prompt, Poem
 
 def add_prompt(data, user_id):
     # Use datetime.now() to get the current date and time as a datetime object
