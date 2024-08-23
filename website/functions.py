@@ -11,13 +11,13 @@ def add_prompt(data, user_id):
 
 def add_poem(data, user_id, prompt_id):
     # Use datetime.now() to get the current date and time as a datetime object
-    logging.error("Database Object: poem", db)
+    print("\n****\nDatabase Object: poem", db)
     new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)
     db.session.add(new_poem)
     db.session.commit()
 
 def add_user(email, password, first_name):
-    logging.error("Database Object: user", db)
+    print("\n****\nDatabase Object: user", db)
     new_user = Users(email=email, password=password, first_name=first_name)
     db.session.add(new_user)
     db.session.commit()
