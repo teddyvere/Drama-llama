@@ -2,12 +2,13 @@ import inspect
 import logging
 import traceback
 import dotenv
-from flask import Flask, app, text
+from flask import Flask, app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from dotenv import load_dotenv
+from sqlalchemy import inspect, text
 import os
 import webbrowser
 
