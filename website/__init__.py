@@ -12,7 +12,7 @@ import os
 load_dotenv()
 
 mail = Mail()
-db = SQLAlchemy()
+db = None
 migrate = Migrate()
 
 class Config:
@@ -106,7 +106,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config.from_object(Config)
     
-    db.init_app(app)
+    if db == None:
+        db = SQLAlchemy(app)  # Initialize SQLAlchemy with the Flask app
+        db.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'routes.login'
