@@ -110,7 +110,7 @@ def create_app():
     
     if db == None:
         db = SQLAlchemy(app)  # Initialize SQLAlchemy with the Flask app
-        db.init_app(app)
+        #db.init_app(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'routes.login'
