@@ -41,7 +41,7 @@
         "documentation": {}
     },
     {
-        "label": "app",
+        "label": "current_app",
         "importPath": "flask",
         "description": "flask",
         "isExtraImport": true,
@@ -446,51 +446,6 @@
         "documentation": {}
     },
     {
-        "label": "add_prompt",
-        "kind": 2,
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "peekOfCode": "def add_prompt(data, user_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_prompt = Prompt(data=data, date=datetime.now(), user_id=user_id)\n    db.session.add(new_prompt)\n    db.session.commit()\ndef add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    print(\"\\n****\\nDatabase Object: poem\", db)\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)",
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
-        "label": "add_poem",
-        "kind": 2,
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    print(\"\\n****\\nDatabase Object: poem\", db)\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()\ndef add_user(email, password, first_name):\n    print(\"\\n****\\nDatabase Object: user\", db)\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)",
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
-        "label": "add_user",
-        "kind": 2,
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "peekOfCode": "def add_user(email, password, first_name):\n    print(\"\\n****\\nDatabase Object: user\", db)\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
-        "label": "get_prompts_by_user_id",
-        "kind": 2,
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "peekOfCode": "def get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
-        "label": "get_poems_by_prompt_id",
-        "kind": 2,
-        "importPath": "website.functions",
-        "description": "website.functions",
-        "peekOfCode": "def get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
-        "detail": "website.functions",
-        "documentation": {}
-    },
-    {
         "label": "Users",
         "kind": 6,
         "importPath": "website.models",
@@ -702,7 +657,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nwith app.app_context():\n    try:\n        # Check the add user function\n        logging.info(\"User add function: %s\", app.config['USER_ADD_FUNCTION'])\n        # Check the add prompt function\n        logging.info(\"Prompt add function: %s\", app.config['PROMPT_ADD_FUNCTION'])\n        # Check the add poem function",
+        "peekOfCode": "app = create_app()\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nwith app.app_context():\n    try:\n        # Check the add user function\n        logging.info(\"Users add function: %s\", app.config['USERS_ADD_FUNCTION'])\n        # Check the add prompt function\n        logging.info(\"Prompt add function: %s\", app.config['PROMPT_ADD_FUNCTION'])\n        # Check the add poem function",
         "detail": "main",
         "documentation": {}
     }

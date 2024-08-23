@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 with app.app_context():
     try:
         # Check the add user function
-        logging.info("User add function: %s", app.config['USER_ADD_FUNCTION'])
+        logging.info("Users add function: %s", app.config['USERS_ADD_FUNCTION'])
         # Check the add prompt function
         logging.info("Prompt add function: %s", app.config['PROMPT_ADD_FUNCTION'])
         # Check the add poem function
