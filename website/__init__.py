@@ -1,18 +1,13 @@
-import inspect
+
 import logging
-import traceback
-import dotenv
-from flask import Flask, app
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from dotenv import load_dotenv
-from sqlalchemy import inspect, text
+from sqlalchemy import text
 import os
-import webbrowser
-
-from website.models import Poem, Prompt, Users
 
 load_dotenv()
 class Config:
@@ -149,23 +144,6 @@ def create_app():
             logging.info("Database connection successful")
         except Exception as e:
             logging.error("Database connection failed: %s", e)
-        
-        # Inspect the database for the presence of tables
-        try:
-            inspector = inspect(db.engine)
-            table_models = {
-                'users': Users,
-                'prompt': Prompt,
-                'poem': Poem
-            }
-            
-            # Create tables if they do not exist
-            for table_name, model_class in table_models.items():
-                if not inspector.has_table(table_name):
-                    model_class.__table__.create(bind=db.engine)
-                    logging.info(f"Created table {table_name}")
-        except Exception as e:
-            logging.error(f"Error inspecting or creating tables: {e}")
     
 
     return app
