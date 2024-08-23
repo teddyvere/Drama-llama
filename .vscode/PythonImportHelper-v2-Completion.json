@@ -442,7 +442,7 @@
         "kind": 2,
         "importPath": "website.functions",
         "description": "website.functions",
-        "peekOfCode": "def add_prompt(data, user_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_prompt = Prompt(data=data, date=datetime.now(), user_id=user_id)\n    db.session.add(new_prompt)\n    db.session.commit()\ndef add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()",
+        "peekOfCode": "def add_prompt(data, user_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_prompt = Prompt(data=data, date=datetime.now(), user_id=user_id)\n    db.session.add(new_prompt)\n    db.session.commit()\ndef add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    logging.info(\"Database Object: poem\", db)\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)",
         "detail": "website.functions",
         "documentation": {}
     },
@@ -451,7 +451,7 @@
         "kind": 2,
         "importPath": "website.functions",
         "description": "website.functions",
-        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()\ndef add_user(email, password, first_name):\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):",
+        "peekOfCode": "def add_poem(data, user_id, prompt_id):\n    # Use datetime.now() to get the current date and time as a datetime object\n    logging.info(\"Database Object: poem\", db)\n    new_poem = Poem(data=data, date=datetime.now(), user_id=user_id, prompt_id=prompt_id)\n    db.session.add(new_poem)\n    db.session.commit()\ndef add_user(email, password, first_name):\n    logging.info(\"Database Object: user\", db)\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)",
         "detail": "website.functions",
         "documentation": {}
     },
@@ -460,7 +460,7 @@
         "kind": 2,
         "importPath": "website.functions",
         "description": "website.functions",
-        "peekOfCode": "def add_user(email, password, first_name):\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
+        "peekOfCode": "def add_user(email, password, first_name):\n    logging.info(\"Database Object: user\", db)\n    new_user = Users(email=email, password=password, first_name=first_name)\n    db.session.add(new_user)\n    db.session.commit()\ndef get_prompts_by_user_id(user_id):\n    return Prompt.query.filter_by(user_id=user_id).all()\ndef get_poems_by_prompt_id(prompt_id):\n    return Poem.query.filter_by(prompt_id=prompt_id).all()",
         "detail": "website.functions",
         "documentation": {}
     },
