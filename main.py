@@ -1,6 +1,5 @@
 import os
 import logging
-from flask import Flask
 from website import create_app, db
 from sqlalchemy import inspect
 from website.models import Users, Prompt, Poem
@@ -13,9 +12,11 @@ logging.basicConfig(level=logging.INFO)
 
 with app.app_context():
     try:
+        # Ensure the database is properly initialized
+        db.init_app(app)
+        
         # Check database connection
-        with db.engine.connect() as connection:
-            connection.execute('SELECT 1')
+        db.session.execute('SELECT 1')
         logging.info("Database connection successful")
     except Exception as e:
         logging.error("Database connection failed: %s", e)

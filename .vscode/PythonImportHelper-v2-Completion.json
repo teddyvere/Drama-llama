@@ -113,14 +113,6 @@
         "documentation": {}
     },
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "context",
         "importPath": "alembic",
         "description": "alembic",
@@ -694,7 +686,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nwith app.app_context():\n    try:\n        # Check database connection\n        with db.engine.connect() as connection:\n            connection.execute('SELECT 1')\n        logging.info(\"Database connection successful\")\n    except Exception as e:",
+        "peekOfCode": "app = create_app()\n# Set up logging\nlogging.basicConfig(level=logging.INFO)\nwith app.app_context():\n    try:\n        # Ensure the database is properly initialized\n        db.init_app(app)\n        # Check database connection\n        db.session.execute('SELECT 1')\n        logging.info(\"Database connection successful\")",
         "detail": "main",
         "documentation": {}
     }
