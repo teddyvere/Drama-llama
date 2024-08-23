@@ -53,12 +53,16 @@ def sign_up():
         elif len(password1) < 7:
             flash("Password must be at least 7 characters long.", category='error')
         else:
-            new_user = Users(email=email, first_name=first_name, password=password1)
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user, remember=True)
-            flash("Registration successful!", category='success')
-            return redirect(url_for('views.home'))
+            try:
+                new_user = Users(email=email, first_name=first_name, password=password1)
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user, remember=True)
+                flash("Registration successful!", category='success')
+                return redirect(url_for('views.home'))
+            except Exception as e:
+                print(traceback.format_exc())
+                flash("An error occurred while trying to register. Please try again.", category='error')
 
     return render_template("sign-up.html")
 
@@ -77,6 +81,7 @@ def profile():
     return render_template('profile.html', chat_count=chat_count, recent_questions=recent_questions)
 
 @routes.route('/chatbot', methods=['GET', 'POST'])
+@login_required
 def chatbot():
     if request.method == 'POST':
         try:
