@@ -13,17 +13,8 @@ logging.basicConfig(level=logging.INFO)
 with app.app_context():
     try:
         # Check the add user function
-        logging.info("Users add function: %s", app.config['USERS_ADD_FUNCTION'])
-        # Check the add prompt function
-        logging.info("Prompt add function: %s", app.config['PROMPT_ADD_FUNCTION'])
-        # Check the add poem function
-        logging.info("Poem add function: %s", app.config['POEM_ADD_FUNCTION'])
-        # Check the get prompts by user ID function
-        logging.info("Get prompts by user ID function: %s", app.config['GET_PROMPTS_BY_USER_ID_FUNCTION'])
-        # Check the get poems by prompt ID function
-        logging.info("Get poems by prompt ID function: %s", app.config['GET_POEMS_BY_PROMPT_ID_FUNCTION'])
+        logging.info("with app.app_context():")
 
-    
         logging.info(f"Database URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
         # Check database connection
