@@ -6,6 +6,7 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
+import webbrowser
 
 load_dotenv()
 class Config:
@@ -25,7 +26,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = '69_2024_0030'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://", 1)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config.from_object(Config)
