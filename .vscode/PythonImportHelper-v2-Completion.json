@@ -267,6 +267,22 @@
         "documentation": {}
     },
     {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "website",
         "description": "website",
@@ -458,7 +474,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))\n        else:\n            flash(\"Invalid credentials, try again.\", category='error')",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email).first()\n        if user:\n            if check_password_hash(user.password, password):\n                login_user(user, remember=True)\n                flash(\"Logged in successfully!\", category='success')\n            return redirect(url_for('views.home'))",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -584,7 +600,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email, password=password).first()\n        if user:\n            login_user(user, remember=True)\n            return redirect(url_for('views.home'))",
+        "peekOfCode": "routes = Blueprint('routes', __name__)\n@routes.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = Users.query.filter_by(email=email).first()\n        if user:\n            if check_password_hash(user.password, password):\n                login_user(user, remember=True)",
         "detail": "website.routes",
         "documentation": {}
     },

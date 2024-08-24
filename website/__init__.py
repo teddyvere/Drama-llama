@@ -68,7 +68,6 @@ def create_app():
     import traceback
 
     with app.app_context():
-        traceback.print_stack()
         try:
             # Check the add user function
             logging.info("with app.app_context():")

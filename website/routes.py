@@ -5,6 +5,7 @@ from .models import Prompt, Users
 from .functions import add_poem, add_prompt, get_prompts_by_user_id 
 from flask_login import login_user, logout_user, current_user, login_required
 from website.chatbot import Chat
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 routes = Blueprint('routes', __name__)
@@ -16,10 +17,11 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user = Users.query.filter_by(email=email, password=password).first()
-        
+        user = Users.query.filter_by(email=email).first()
         if user:
-            login_user(user, remember=True)
+            if check_password_hash(user.password, password):
+                login_user(user, remember=True)
+                flash("Logged in successfully!", category='success')
             return redirect(url_for('views.home'))
         else:
             flash("Invalid credentials, try again.", category='error')
@@ -53,7 +55,7 @@ def sign_up():
             flash("Password must be at least 7 characters long.", category='error')
         else:
             try:
-                new_user = Users(email=email, first_name=first_name, password=password1)
+                new_user = Users(email=email, first_name=first_name, password=generate_password_hash(password1, 'sha256'))
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user, remember=True)
