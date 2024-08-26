@@ -375,7 +375,7 @@
         "kind": 6,
         "importPath": "website.chatbot",
         "description": "website.chatbot",
-        "peekOfCode": "class Chat:\n    def __init__(self, initial_instruction):\n        self.instruction = initial_instruction \n        self.messages = [\n            {\"role\": \"system\", \"content\": self.instruction}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Add user input to the conversation history",
+        "peekOfCode": "class Chat:\n    def __init__(self, initial_instruction):\n        self.instruction = initial_instruction \n        self.messages = [\n            {\"role\": \"system\", \"content\": self.instruction}\n        ]\n    def add_message(self, role, content):\n        self.messages.append({\"role\": role, \"content\": content})\n    def response(self, user_input):\n        # Define the character limit",
         "detail": "website.chatbot",
         "documentation": {}
     },

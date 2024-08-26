@@ -25,6 +25,13 @@ class Chat:
         self.messages.append({"role": role, "content": content})
 
     def response(self, user_input):
+        # Define the character limit
+        char_limit = 180
+
+        # Check if the user input exceeds the character limit
+        if len(user_input) > char_limit:
+            return f"Error: Your input exceeds the {char_limit} character limit. Please shorten your message."
+
         # Add user input to the conversation history
         self.add_message("user", user_input)
 
