@@ -47,7 +47,6 @@
 			$(
 				'<div id="navPanel">' +
 					'<nav>' +
-						'<a href="home.html" class="link depth-0">Home</a>' +
 						$('#nav').navList() +
 					'</nav>' +
 				'</div>'
