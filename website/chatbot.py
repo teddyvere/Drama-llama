@@ -26,7 +26,7 @@ class Chat:
 
     def response(self, user_input):
         # Define the character limit
-        char_limit = 180
+        char_limit = 90
 
         # Check if the user input exceeds the character limit
         if len(user_input) > char_limit:
