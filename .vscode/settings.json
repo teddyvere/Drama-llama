@@ -13,6 +13,20 @@
             "database": "drama_llama",
             "username": "root",
             "password": "new_password"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "songs",
+            "username": "root",
+            "password": "new_password",
+            "database": "million_songs"
         }
     ]
 }
