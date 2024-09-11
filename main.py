@@ -10,8 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 with app.app_context():
-    if db != None:
-        db.create_all()
+    db.create_all()
 
 
 if __name__ == "__main__":
